@@ -32,13 +32,25 @@
     font-weight: bold;
     cursor: pointer;
     border:  .5px solid #000;
+    > .tw-followCard-stopFollow{
+        display: none;
+    }
     &.is-following{
         border: .2px solid #fff;
         background: transparent;
         color: #fff;
+        width: 130px;
     }
     &.is-following:hover{
+        background-color: rgb(255, 0, 0, 0.178);
         border: .3px solid  rgb(120, 15, 24);
         color:  red;
+        > .tw-followCard-text{
+            display: none;
+        }
+        .tw-followCard-stopFollow{
+            display: block;
+        }
     }
 }
+

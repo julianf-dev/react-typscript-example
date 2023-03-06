@@ -1,22 +1,20 @@
 import "./TwitterFollowCard.scss";
-import { FormatUserNameFunc } from "../../interfaces/FormatUsername";
 import { useState } from "react";
+import { User } from "../../interfaces/users.model";
+import { FormatUserNameFunc } from "../../interfaces/FormatUsername";
 
-interface TwitterFollowCardProps {
-  userName?: string;
-  name: string;
-  formatUserName: FormatUserNameFunc;
-}
+
+
 
 export const TwitterFollowCard = ({
+  initialFollow,
   name,
   userName = 'unknown',
-  formatUserName,
-}: TwitterFollowCardProps) => {
+}: User) => {
   
-  const [isFollowing, setIsFollowing] = useState(false);
-
-  const text = !isFollowing ? 'Follow' : 'unfollow';
+  const [isFollowing, setIsFollowing] = useState(initialFollow);
+initialFollow
+  const text = !isFollowing ? 'Follow' : 'Following';
   const buttonClassName = isFollowing
   ? 'tw-followCard-button is-following'
   : 'tw-followCard-button'
@@ -25,6 +23,9 @@ export const TwitterFollowCard = ({
   const handleFollow = () => {
     setIsFollowing(!isFollowing)
   }
+
+   const formatUserName: FormatUserNameFunc = (userName: string) =>
+    `@${userName}`;
 
   return (
     <article className="tw-followCard">
@@ -45,9 +46,14 @@ export const TwitterFollowCard = ({
         <button 
         onClick={handleFollow}
         className={buttonClassName}>
-          {text}
+          <span className="tw-followCard-text">{text}</span>
+        <span className="tw-followCard-stopFollow">Unfollow</span>
         </button>
       </aside>
     </article>
   );
 };
+function formatUserName(userName: string) {
+  throw new Error("Function not implemented.");
+}
+
