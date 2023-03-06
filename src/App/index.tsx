@@ -4,25 +4,21 @@ import { FormatUserNameFunc } from "../interfaces/FormatUsername";
 
 export const App = () => {  
 
-  const format:FormatUserNameFunc = (userName:string) => `@${userName}`
+  const formatUserName:FormatUserNameFunc = (userName:string) => `@${userName}`
 
   return (
     <section className="App">
       <TwitterFollowCard
-        formatUserName={format}
-        isFollowing
+        formatUserName={formatUserName}
         userName="julian1david"
         name="Julian David"
       />
       <TwitterFollowCard
-        formatUserName={format}
-        isFollowing
-        userName="midudev"
+        formatUserName={formatUserName}
         name="Miguel Duran"
       />
       <TwitterFollowCard
-        formatUserName={format}
-        isFollowing={false}
+        formatUserName={formatUserName}
         userName="freddier"
         name="Freddy Vega"
       />

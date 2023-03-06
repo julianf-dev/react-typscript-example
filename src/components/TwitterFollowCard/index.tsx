@@ -1,20 +1,30 @@
 import "./TwitterFollowCard.scss";
 import { FormatUserNameFunc } from "../../interfaces/FormatUsername";
+import { useState } from "react";
 
 interface TwitterFollowCardProps {
-  isFollowing: boolean;
-  userName: string;
+  userName?: string;
   name: string;
-  formatUserName:FormatUserNameFunc 
+  formatUserName: FormatUserNameFunc;
 }
 
 export const TwitterFollowCard = ({
-  isFollowing,
   name,
-  userName,
+  userName = 'unknown',
   formatUserName,
-}: TwitterFollowCardProps ) => {
+}: TwitterFollowCardProps) => {
+  
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  const text = !isFollowing ? 'Follow' : 'unfollow';
+  const buttonClassName = isFollowing
+  ? 'tw-followCard-button is-following'
+  : 'tw-followCard-button'
   const imgSrc = `https://unavatar.io/twitter/${userName}`;
+
+  const handleFollow = () => {
+    setIsFollowing(!isFollowing)
+  }
 
   return (
     <article className="tw-followCard">
@@ -26,11 +36,17 @@ export const TwitterFollowCard = ({
         />
         <div className="tw-followCard-info">
           <strong>{name}</strong>
-          <span className="tw-followCard-inforUserName">{formatUserName(userName)}</span>
+          <span className="tw-followCard-inforUserName">
+            {formatUserName(userName)}
+          </span>
         </div>
       </header>
       <aside>
-        <button className="tw-followCard-button">follow</button>
+        <button 
+        onClick={handleFollow}
+        className={buttonClassName}>
+          {text}
+        </button>
       </aside>
     </article>
   );
