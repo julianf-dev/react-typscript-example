@@ -1,0 +1,1 @@
+export type FormatUserNameFunc = (userName: string) => string;
